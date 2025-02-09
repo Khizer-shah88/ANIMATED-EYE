@@ -19,7 +19,6 @@ const posts = [
         'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
   },
-  // More posts...
 ];
 
 function Cards() {
@@ -45,8 +44,12 @@ function Cards() {
             });
 
             return (
-              <article key={post.id} className="flex max-w-xl flex-col items-start justify-between" ref={ref}>
-                <div className="flex flex-col items-start justify-between">
+              <article
+                key={post.id}
+                ref={ref}
+                className="flex max-w-xl flex-col items-start justify-between sm:flex-row sm:items-center"
+              >
+                <div className="flex flex-col items-start sm:items-start">
                   <div className="flex items-center gap-x-4 text-xs">
                     <time dateTime={post.datetime} className="text-white">
                       {post.date}
@@ -58,7 +61,7 @@ function Cards() {
                       {post.category.title}
                     </a>
                   </div>
-                  <div className="group relative">
+                  <div className="group relative mt-4">
                     <motion.h3
                       initial="hidden"
                       animate={inView ? 'visible' : 'hidden'}
@@ -67,41 +70,47 @@ function Cards() {
                       className="mt-3 text-lg font-semibold leading-6 text-white group-hover:text-white"
                     >
                       <a href={post.href}>
-                       <span className="absolute inset-0" />
-  {post.title}
-</a>
-</motion.h3>
-<motion.p
-  initial="hidden"
-  animate={inView ? 'visible' : 'hidden'}
-  variants={animationVariants}
-  transition={{ duration: 0.8 }}
-  className="mt-5 line-clamp-3 text-sm leading-6 text-white"
->
-  {post.description}
-</motion.p>
-</div>
-<div className="relative mt-8 flex items-center gap-x-4">
-  <img alt="" src={post.author.imageUrl} className="h-10 w-10 rounded-full bg-white-50" />
-  <div className="text-sm leading-6">
-    <p className="font-semibold text-white">
-      <a href={post.author.href}>
-        <span className="absolute inset-0" />
-        {post.author.name}
-      </a>
-    </p>
-    <p className="text-white-600">{post.author.role}</p>
-  </div>
-</div>
-</div>
-<img src={post.author.imageUrl} alt={post.author.name} className="ml-4 h-[40vh] w-[40vh] rounded-lg object-cover absolute right-[150px] lg:right-[50px] md:h-[30vh] md:w-[30vh] sm:h-[20vh] sm:w-[20vh]" />
-</article>
-);
-})}
-</div>
-</div>
-</div>
-);
+                        <span className="absolute inset-0" />
+                        {post.title}
+                      </a>
+                    </motion.h3>
+                    <motion.p
+                      initial="hidden"
+                      animate={inView ? 'visible' : 'hidden'}
+                      variants={animationVariants}
+                      transition={{ duration: 0.8 }}
+                      className="mt-3 text-sm leading-6 text-white"
+                    >
+                      {post.description}
+                    </motion.p>
+                  </div>
+                  <div className="relative mt-6 flex items-center gap-x-4">
+                    <img alt="" src={post.author.imageUrl} className="h-10 w-10 rounded-full bg-white-50" />
+                    <div className="text-sm leading-6">
+                      <p className="font-semibold text-white">
+                        <a href={post.author.href}>
+                          <span className="absolute inset-0" />
+                          {post.author.name}
+                        </a>
+                      </p>
+                      <p className="text-white-600">{post.author.role}</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Responsive Image Handling */}
+                <img
+  src={post.author.imageUrl}
+  alt={post.author.name}
+  className="h-32 w-32 rounded-lg object-cover sm:h-40 sm:w-40 sm:mx-auto sm:mt-6 lg:absolute lg:right-10 lg:h-72 lg:w-72"
+/>
+
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Cards;
